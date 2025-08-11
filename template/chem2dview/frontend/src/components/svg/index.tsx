@@ -10,7 +10,7 @@ const Chem2DSVGCom = (props: ComponentProps) => {
   const {args} = props
   const MolSvgProps = args as MolSVGProps
   return (
-    <ChemSVG mol={MolSvgProps.mol}/>
+    <ChemSVG style={{margin: "2px"}} mol={MolSvgProps.mol}/>
   )
 }
 const Chem2DSVG = withStreamlitConnection(Chem2DSVGCom)

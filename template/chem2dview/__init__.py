@@ -85,6 +85,6 @@ def Chem2DIMG(mol, key=None):
     component = _component_func(component="Chem2DIMG",mol=mol, key=key, default=0)
     return component
 
-def ChemKetcher(staticResourcesUrl, key=None):
+def ChemKetcher(staticResourcesUrl="./", key=None):
     component = _component_func(component="ChemKetcher", staticResourcesUrl=staticResourcesUrl, key=key, default=0)
     return component

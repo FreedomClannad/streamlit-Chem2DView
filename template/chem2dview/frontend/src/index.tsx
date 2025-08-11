@@ -4,7 +4,7 @@ import "chem2dview/dist/styles.css"
 import {Streamlit, ComponentProps, withStreamlitConnection } from "streamlit-component-lib"
 import { ComponentMap } from "./components"
 const rootElement = document.getElementById("root")
-
+import "./style.css"
 function App(props: ComponentProps): ReactElement {
 
   const {args, theme} = props
@@ -26,6 +26,8 @@ const APPRender = withStreamlitConnection(App)
 
 root.render(
   <StrictMode>
-    <APPRender />
+    <div className="component">
+      <APPRender />
+    </div>
   </StrictMode>
 )

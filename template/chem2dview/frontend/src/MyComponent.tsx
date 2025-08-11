@@ -55,10 +55,32 @@ function MyComponent({ args, disabled, theme }: ComponentProps): ReactElement {
    * This ensures the component fits properly in the Streamlit app
    */
   useEffect(() => {
+    console.log("222333")
     // Call this when the component's size might change
-    Streamlit.setFrameHeight()
+    // Streamlit.setFrameHeight()
     // Adding the style and theme as dependencies since they might
     // affect the visual size of the component.
+    function updateHeight() {
+      // 取整个文档高度
+      const height = document.documentElement.scrollHeight;
+      console.log(height)
+      if (Streamlit.setFrameHeight) {
+        Streamlit.setFrameHeight(height + 4);
+      }
+    }
+
+    // 首次渲染后调用一次
+    updateHeight();
+
+    // 监听窗口大小变化，内容高度可能变
+    window.addEventListener("resize", updateHeight);
+
+    // 如果你的组件内容会异步加载（比如分子渲染完成后高度变了），
+    // 也要在异步完成时调用 updateHeight()。
+
+    return () => {
+      window.removeEventListener("resize", updateHeight);
+    };
   }, [style, theme])
 
   /**

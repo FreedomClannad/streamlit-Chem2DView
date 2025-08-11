@@ -4,15 +4,14 @@ import {
     ComponentProps,
 } from "streamlit-component-lib"
 
-import { KetcherEdit, useKetcherEditHook } from "chem2dview"
+import { KetcherStandaloneEdit, KetcherEdit, useKetcherEditHook } from "chem2dview"
 import { useMemo } from "react"
 
 const KetcherEditCom = (props: ComponentProps) => {
     const {args} = props
-    const {staticResourcesUrl} = args
+    const {staticResourcesUrl, mode} = args
 
     const staticResourcesURL = useMemo(() => {
-        console.log(staticResourcesUrl)
         if(staticResourcesUrl) {
             return staticResourcesUrl
         } else {
@@ -21,18 +20,28 @@ const KetcherEditCom = (props: ComponentProps) => {
     }, [staticResourcesUrl])
     const { KetcherRef } = useKetcherEditHook();
     const handleChangeSmiles = (smiles: string) => {
-        console.log(smiles)
             Streamlit.setComponentValue( {
                 smiles
             })
     }
+    const render = () => {
+        if(mode === 'background') {
+            return <KetcherEdit
+              ref={KetcherRef}
+              staticResourcesUrl={staticResourcesURL}
+              onChangeSmiles={handleChangeSmiles}
+            />
+        } else {
+            return <KetcherStandaloneEdit
+              ref={KetcherRef}
+              staticResourcesUrl={staticResourcesURL}
+              onChangeSmiles={handleChangeSmiles}
+            />
+        }
+    }
     return (
         <div style={{width: "600px", height: "600px"}}>
-            <KetcherEdit
-                ref={KetcherRef}
-                staticResourcesUrl={staticResourcesURL}
-                onChangeSmiles={handleChangeSmiles}
-            />
+            {render()}
         </div>
     )
 }
