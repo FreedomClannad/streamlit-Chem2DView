@@ -4,8 +4,8 @@ import {
     ComponentProps,
 } from "streamlit-component-lib"
 
-import { KetcherStandaloneEdit, KetcherEdit, useKetcherEditHook } from "chem2dview"
-import { useMemo } from "react"
+import { KetcherStandaloneEdit, KetcherEdit, KetcherEditHandle } from "chem2dview"
+import { useMemo, useRef } from "react"
 
 const KetcherEditCom = (props: ComponentProps) => {
     const {args} = props
@@ -18,7 +18,7 @@ const KetcherEditCom = (props: ComponentProps) => {
             return "./"
         }
     }, [staticResourcesUrl])
-    const { KetcherRef } = useKetcherEditHook();
+    const KetcherRef = useRef<KetcherEditHandle>(null);
     const handleChangeSmiles = (smiles: string) => {
             Streamlit.setComponentValue( {
                 smiles
