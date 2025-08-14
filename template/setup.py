@@ -7,7 +7,7 @@ long_description = (this_directory / "README.md").read_text()
 
 setuptools.setup(
     name="streamlit-chem2dview",
-    version="0.0.1",
+    version="0.0.2",
     author="alphama",
     author_email="feichaoyuan@protonunfold.com",
     description="Streamlit's chem2dview component",
